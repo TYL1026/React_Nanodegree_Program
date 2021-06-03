@@ -1,6 +1,6 @@
 import React ,{Component} from 'react'
 import PropTypes ,{array,func} from 'prop-types'
-
+import {Link} from 'react-router-dom'
 class bookshelf extends Component{
     state = {
         name: ['Currently Reading','Want To Read','Read'],
@@ -44,6 +44,8 @@ class bookshelf extends Component{
                     </div>)
                 }
             </ol>
+            
+            <Link className="open-search" to='/search'>Add a book</Link>
         </div>
         )
     }

@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Header from './header.js'
 import Bookshelf from './bookshelf.js'
+import SearchBar from './searchBar.js'
 import { Route } from 'react-router-dom'
 class BooksApp extends React.Component {
   state = {
@@ -42,6 +43,11 @@ class BooksApp extends React.Component {
             {console.log(this.state.book)}
             <Header/>
             <Bookshelf books={this.state.book} move={this.move}/>
+          </div>
+        )}/>
+        <Route exact path='/search' render={()=>(
+          <div className="app">
+            <SearchBar/>
           </div>
         )}/>
       </div>
