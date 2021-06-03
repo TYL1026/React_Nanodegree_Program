@@ -1,5 +1,6 @@
 import React ,{Component} from 'react'
-import PropTypes from 'prop-types'
+import PropTypes ,{array,func} from 'prop-types'
+
 class bookshelf extends Component{
     state = {
         name: ['Currently Reading','Want To Read','Read'],
@@ -7,26 +8,30 @@ class bookshelf extends Component{
         want:[],
         read:[]
     }
+    handleShelfChange(event,bookid){
+        this.props.move(bookid,event.target.value)
+    }
     render(){
         return(
         <div>
             <ol>
-                {this.state.name && this.state.name.map((name) => 
-                    <div className="bookshelf">
+                {this.state.name && this.state.name.map((name,index) => 
+                    <div className="bookshelf" key= {index} >
                     <h2 className="bookshelf-title">{name}</h2>
-                    <li className="books-grid">
+                    <div className="books-grid">
                     {this.props.books && this.props.books.filter(book =>  book.shelf.toLowerCase() === name.toLowerCase().replace(/ /g,'')).map(book => 
                         <li key={book.id}>
                             <div className="book">
                                 <div className="book-top">
-                                    <div className="book-cover" style={{backgroundImage: `url(${book.url})`}}></div>
+                                    <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
                                         <div className="book-shelf-changer">
-                                        <select>
+                                        <select onChange={(event)=>this.handleShelfChange(event,book.id)}>
                                             <option value="move" disabled>Move to...</option>
+                                            <option value="none">None</option>
                                             <option value="currentlyReading">Currently Reading</option>
                                             <option value="wantToRead">Want to Read</option>
                                             <option value="read">Read</option>
-                                            <option value="none">None</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -35,18 +40,7 @@ class bookshelf extends Component{
                             </div>
                         </li>)
                     }
-                  
-                    {/* <li>
-                        <div className="book">
-                            <div className="book-top">
-                                <div className="book-cover" style={{backgroundImage: ""}}></div>
-                                <div className="book-shelf-changer">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    */}
-                    </li>
+                    </div>
                     </div>)
                 }
             </ol>
@@ -55,8 +49,8 @@ class bookshelf extends Component{
     }
 
 }
-bookshelf.PropTypes={
-    books: PropTypes.array.isRequired,
-    move: PropTypes.func.isRequired
+bookshelf.propTypes={
+    books: array.isRequired,
+    move: func.isRequired
 }
 export default bookshelf

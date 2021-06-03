@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Header from './header.js'
 import Bookshelf from './bookshelf.js'
+import { Route } from 'react-router-dom'
 class BooksApp extends React.Component {
   state = {
     /**
@@ -12,20 +13,37 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
+    book:[],
+    shelf:["wantToRead", "currentlyReading", "read"]
   }
   componentDidMount(){
+    this.refreshBooks()
+  }
+  
+  move = (bookid, shelf) =>{
+    console.log({bookid,shelf})
+    BooksAPI.update({id:bookid},shelf)
+    .then(result=> {
+      console.log(result)
+      this.refreshBooks()
+    })
+  }
+  refreshBooks(){
     BooksAPI.getAll()
-    .then((book) => this.setState({book}))
+    .then((book) => {
+      this.setState({book})
+    })
   }
   render() {
     return (
-      <div className="app">
-        {console.log(this.state.book)}
-        <Header/>
-        <ul>
-          {this.state.book && this.state.book.map((book) => <li key={book.id}>{book.title}</li>)}
-        </ul>
-        <Bookshelf books={this.state.book}/>
+      <div>
+        <Route exact path='/' render={()=>(
+          <div className="app">
+            {console.log(this.state.book)}
+            <Header/>
+            <Bookshelf books={this.state.book} move={this.move}/>
+          </div>
+        )}/>
       </div>
     )
   }
