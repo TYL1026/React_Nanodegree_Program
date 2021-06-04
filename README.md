@@ -6,7 +6,7 @@ Provided function:
 * [`update`](#update)
 * [`search`](#search)
 
-### `getAll`
+##### `getAll`
 
 Method Signature:
 
@@ -17,7 +17,7 @@ getAll()
 * Returns a Promise which resolves to a JSON object containing a collection of book objects.
 * This collection represents the books currently in the bookshelves in your app.
 
-### `update`
+##### `update`
 
 Method Signature:
 
@@ -29,7 +29,7 @@ update(book, shelf)
 * shelf: `<String>` contains one of ["wantToRead", "currentlyReading", "read"]  
 * Returns a Promise which resolves to a JSON object containing the response data of the POST request
 
-### `search`
+##### `search`
 
 Method Signature:
 
