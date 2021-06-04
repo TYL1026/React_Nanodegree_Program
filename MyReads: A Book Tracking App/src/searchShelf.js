@@ -4,7 +4,8 @@ class searchShelf extends Component{
     render(){
         return(
             <div className="search-books-results">
-                <ol className="books-grid">
+                {this.props.books.isArray()?(
+                    <ol className="books-grid">
                     <div className="bookshelf-books">
                         <ol className="books-grid">
                             {this.props.books.map(book => 
@@ -19,7 +20,6 @@ class searchShelf extends Component{
                                                 <option value="currentlyReading">Currently Reading</option>
                                                 <option value="wantToRead">Want to Read</option>
                                                 <option value="read">Read</option>
-                                                
                                             </select>
                                         </div>
                                     </div>
@@ -32,6 +32,10 @@ class searchShelf extends Component{
                         </ol>
                     </div>
                 </ol>
+                ):(
+                    <div></div>
+                ) }
+
             </div>
         )
     }
