@@ -1,13 +1,15 @@
 import React ,{Component} from 'react'
 import PropTypes ,{array,func} from 'prop-types'
+
 class searchShelf extends Component{
-    
+    handleShelfChange(event,bookid){
+        this.props.move(bookid,event.target.value)
+    }
     render(){
         return(
             <div>
-                {Array.isArray(this.props.searchShelf)?(
+                {Array.isArray(this.props.books)?(
                     <div className="search-books-results">
-                    {console.log(Array.isArray(this.props.searchShelf))}
                     <ol className="books-grid">
                         <div className="bookshelf-books">
                             <ol className="books-grid">
@@ -15,7 +17,6 @@ class searchShelf extends Component{
                                 <li key={book.id}>
                                     <div className="book">
                                         <div className="book-top">
-
                                             <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
                                                 <div className="book-shelf-changer">
                                                 <select onChange={(event)=>this.handleShelfChange(event,book.id)}>
@@ -30,13 +31,12 @@ class searchShelf extends Component{
                                         <div className="book-title">{book.title}</div>
                                         <div className="book-authors">{book.authors}</div>
                                     </div>
-                                </li>
-                                    
+                                </li> 
                                 )}
                             </ol>
                         </div>
                     </ol>
-                    </div>
+                </div>
                 ):(
                 <div className="search-books-results">
                     {console.log(Array.isArray(this.props.searchShelf))}
@@ -49,5 +49,9 @@ class searchShelf extends Component{
             
         )
     }
+}
+searchShelf.propTypes={
+    books: array.isRequired,
+    move: func.isRequired
 }
 export default searchShelf
