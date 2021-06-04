@@ -4,9 +4,6 @@ import {Link} from 'react-router-dom'
 class bookshelf extends Component{
     state = {
         name: ['Currently Reading','Want To Read','Read'],
-        current:[],
-        want:[],
-        read:[]
     }
     handleShelfChange(event,bookid){
         this.props.move(bookid,event.target.value)

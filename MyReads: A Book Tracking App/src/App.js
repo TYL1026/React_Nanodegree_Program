@@ -17,10 +17,16 @@ class BooksApp extends React.Component {
     this.refreshBooks()
   }
   search = (name) =>{
-    BooksAPI.search(name)
-    .then(searchShelf=> {
-      this.setState({searchShelf})
-    })
+    if (name.length > 0){
+      BooksAPI.search(name)
+      .then(searchShelf=> {
+        console.log(searchShelf)
+        this.setState({searchShelf})
+      })
+    }else{
+      return
+    }
+
   
   }
   move = (bookid, shelf) =>{

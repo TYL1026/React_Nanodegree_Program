@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import PropTypes ,{array,func} from 'prop-types'
+import PropTypes ,{array,func,object} from 'prop-types'
 
 class searchShelf extends Component{
     handleShelfChange(event,bookid){
@@ -17,13 +17,18 @@ class searchShelf extends Component{
                                 <li key={book.id}>
                                     <div className="book">
                                         <div className="book-top">
-                                            {
-                                                book.hasOwnProperty('smallThumbnail')?(
-                                                    <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                                            <div>
+                                                {book.hasOwnProperty('imageLinks')?(
+                                                    book.hasOwnProperty('smallThumbnail')?(
+                                                        <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                                                    ):(
+                                                        <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail })`}}></div>
+                                                    )
                                                 ):(
-                                                    <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail })`}}></div>
+                                                    <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url()`}}></div>
                                                 )
-                                            }
+                                                }
+                                            </div>
                                                 <div className="book-shelf-changer">
                                                 <select onChange={(event)=>this.handleShelfChange(event,book.id)}>
                                                     <option value="move" disabled>Move to...</option>
@@ -57,7 +62,7 @@ class searchShelf extends Component{
     }
 }
 searchShelf.propTypes={
-    books: array.isRequired,
-    move: func.isRequired
+    move: func.isRequired,
+    books:PropTypes.oneOfType(PropTypes.array, PropTypes.object)
 }
 export default searchShelf
