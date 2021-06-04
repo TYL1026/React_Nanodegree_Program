@@ -4,7 +4,7 @@ class searchShelf extends Component{
     render(){
         return(
             <div className="search-books-results">
-                {this.props.books.isArray()?(
+                {this.props.searchShelf.isArray()?(
                     <ol className="books-grid">
                     <div className="bookshelf-books">
                         <ol className="books-grid">
