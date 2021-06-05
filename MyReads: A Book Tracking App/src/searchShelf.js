@@ -2,8 +2,9 @@ import React ,{Component} from 'react'
 import{func} from 'prop-types'
 
 class searchShelf extends Component{
-    handleShelfChange(event,bookid){
-        this.props.move(bookid,event.target.value)
+    handleShelfChange(event,book){
+        book.shelf = event.target.value
+        this.props.move(book.id,event.target.value)
     }
     render(){
         return(
@@ -30,7 +31,7 @@ class searchShelf extends Component{
                                                 }
                                             </div>
                                                 <div className="book-shelf-changer">
-                                                <select value={book.shelf} onChange={(event)=>this.handleShelfChange(event,book.id)}>
+                                                <select value={book.shelf} onChange={(event)=>this.handleShelfChange(event,book)}>
                                                     <option value="move" disabled>Move to...</option>
                                                     <option value="none">None</option>
                                                     <option value="currentlyReading">Currently Reading</option>

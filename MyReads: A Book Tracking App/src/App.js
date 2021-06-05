@@ -21,13 +21,17 @@ class BooksApp extends React.Component {
     if (name.length > 0){
       BooksAPI.search(name)
       .then(result=> {
-        const searchShelf = result.map(book=>
-          this.addShelf(book,this.state.book)
-          )
-        this.setState({searchShelf})
-      })
+        if(result.hasOwnProperty('error')){
+          return
+      }
+      const searchShelf = result.map(book=>
+        this.addShelf(book,this.state.book)
+      )
+      this.setState({searchShelf})
+    })
     }else{
-      return
+      const searchShelf={}
+      this.setState({searchShelf})
     }
   }
 
@@ -37,6 +41,7 @@ class BooksApp extends React.Component {
       this.refreshBooks()
     })
   }
+
 
   addShelf = (searchShelf,book)=>{
     const result = book.find(shelf=>shelf.title === searchShelf.title)
@@ -58,6 +63,7 @@ class BooksApp extends React.Component {
       this.setState({book})
     })
   }
+
   render() {
     return (
       <div>
