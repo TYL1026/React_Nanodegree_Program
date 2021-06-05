@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import PropTypes ,{func} from 'prop-types'
+import  {func} from 'prop-types'
 import {Link} from 'react-router-dom'
 class searchBar extends Component{
     render(){

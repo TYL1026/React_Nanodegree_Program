@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import PropTypes ,{array,func,object} from 'prop-types'
+import{func} from 'prop-types'
 
 class searchShelf extends Component{
     handleShelfChange(event,bookid){
@@ -23,14 +23,14 @@ class searchShelf extends Component{
                                                         <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
                                                     ):(
                                                         <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail })`}}></div>
-                                                    )
-                                                ):(
+                                                        )
+                                                    ):(
                                                     <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url()`}}></div>
-                                                )
+                                                    )
                                                 }
                                             </div>
                                                 <div className="book-shelf-changer">
-                                                <select onChange={(event)=>this.handleShelfChange(event,book.id)}>
+                                                <select value={book.shelf} onChange={(event)=>this.handleShelfChange(event,book.id)}>
                                                     <option value="move" disabled>Move to...</option>
                                                     <option value="none">None</option>
                                                     <option value="currentlyReading">Currently Reading</option>
@@ -62,7 +62,6 @@ class searchShelf extends Component{
     }
 }
 searchShelf.propTypes={
-    move: func.isRequired,
-    books:PropTypes.oneOfType(PropTypes.array, PropTypes.object)
+    move: func.isRequired
 }
 export default searchShelf

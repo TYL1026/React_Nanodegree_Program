@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import PropTypes ,{array,func} from 'prop-types'
+import  {array,func} from 'prop-types'
 import {Link} from 'react-router-dom'
 class bookshelf extends Component{
     state = {
@@ -22,7 +22,7 @@ class bookshelf extends Component{
                                 <div className="book-top">
                                     <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
                                         <div className="book-shelf-changer">
-                                        <select onChange={(event)=>this.handleShelfChange(event,book.id)}>
+                                        <select value={book.shelf} onChange={(event)=>this.handleShelfChange(event,book.id)}>
                                             <option value="move" disabled>Move to...</option>
                                             <option value="none">None</option>
                                             <option value="currentlyReading">Currently Reading</option>

@@ -16,25 +16,31 @@ class BooksApp extends React.Component {
   componentDidMount(){
     this.refreshBooks()
   }
+
   search = (name) =>{
     if (name.length > 0){
       BooksAPI.search(name)
       .then(searchShelf=> {
-        console.log(searchShelf)
         this.setState({searchShelf})
       })
     }else{
       return
     }
-
-  
   }
+
   move = (bookid, shelf) =>{
     BooksAPI.update({id:bookid},shelf)
     .then(result=> {
       this.refreshBooks()
     })
   }
+
+  addShelf = (book,searchShelf){
+    book.map(book=>
+      
+      )
+  }
+
   refreshBooks(){
     BooksAPI.getAll()
     .then((book) => {
@@ -53,7 +59,7 @@ class BooksApp extends React.Component {
         <Route exact path='/search' render={()=>(
           <div className="app">
             <SearchBar search={this.search}/>
-            <SearchShelf books={this.state.searchShelf} move={this.move}/>
+            <SearchShelf books={this.state.searchShelf} move={this.move} shelfBook={this.state.book}/>
           </div>
         )}/>
       </div>
