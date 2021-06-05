@@ -20,7 +20,10 @@ class BooksApp extends React.Component {
   search = (name) =>{
     if (name.length > 0){
       BooksAPI.search(name)
-      .then(searchShelf=> {
+      .then(result=> {
+        const searchShelf = result.map(book=>
+          this.addShelf(book,this.state.book)
+          )
         this.setState({searchShelf})
       })
     }else{
@@ -35,10 +38,18 @@ class BooksApp extends React.Component {
     })
   }
 
-  addShelf = (book,searchShelf){
-    book.map(book=>
-      
-      )
+  addShelf = (searchShelf,book)=>{
+    const result = book.find(shelf=>shelf.title === searchShelf.title)
+    if(result === undefined){
+      return {
+        ...searchShelf,
+        shelf: "None"
+      }
+    }
+    return{
+      ...searchShelf,
+        shelf: result.shelf
+    }
   }
 
   refreshBooks(){
