@@ -22,6 +22,8 @@ class BooksApp extends React.Component {
       BooksAPI.search(name)
       .then(result=> {
         if(result.hasOwnProperty('error')){
+          const searchShelf={}
+          this.setState({searchShelf})
           return
       }
       const searchShelf = result.map(book=>
